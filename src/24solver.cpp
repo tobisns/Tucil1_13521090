@@ -258,7 +258,6 @@ int main() {
 						}
 					} while (!validity);
 				}
-				else if (option == '4') { return 0; }
 				else {
 					std::cout << "terjadi kesalahan input." << std::endl << std::endl;
 				}
