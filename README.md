@@ -2,10 +2,10 @@
 > tugas kecil Strategi Algoritma meminta mahasiswa untuk membuat solver game 24 dengan menggunakan metode brute force
 
 ## struktur folder
-- 'bin' berisi executable.
-- 'src' berisi sourcecode program.
-- 'test' berisi hasil tes program.
-- 'doc' berisi laporan dengan format pdf.
+- `bin` berisi executable.
+- `src` berisi sourcecode program.
+- `test` berisi hasil tes program.
+- `doc` berisi laporan dengan format pdf.
 
 ## program environment
 - Microsoft Visual Studio
@@ -14,11 +14,11 @@
 - gcc version 11.3.0
 
 ## Cara Mengompilasi Program
-1. Change Directory ke '../Tucil1_13521090'
+1. Change Directory ke `../Tucil1_13521090`
 2. Jalankan perintah `g++ -o bin/24gamesolver src/solver24.cpp`
 
 ## Cara Menjalankan Program
-1. Change Directory ke '../Tucil1_13521090/bin'
+1. Change Directory ke `../Tucil1_13521090/bin`
 2. Jalankan perintah `./24gamesolver`
 
 ## Cara Menggunakan
