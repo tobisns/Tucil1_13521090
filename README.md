@@ -24,7 +24,7 @@
 ## Cara Menggunakan
 1. ketik '1' untuk mulai dan '4' untuk keluar.
 2. program akan menanyakan apakah pengguna ingin kartu random atau memilih, ketik 'n' jika ingin memilih.
-2. masukan kartu yaitu 2-10,A,K,Q,J (error handling untuk kartu yang tidak berlaku belum di implementasikan).
+2. masukan kartu yaitu 2-10,A,K,Q,J.
 3. program akan menanyakan apakah pengguna ingin save solusi atau tidak, ketik 'y' jika ingin men-save.
 4. ketik nama file, tidak perlu ',txt'.
 5. program akan terus berjalan sampai pengguna mengetik '4'.
