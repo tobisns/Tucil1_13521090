@@ -28,3 +28,6 @@
 3. program akan menanyakan apakah pengguna ingin save solusi atau tidak, ketik 'y' jika ingin men-save.
 4. ketik nama file, tidak perlu ',txt'.
 5. program akan terus berjalan sampai pengguna mengetik '4'.
+
+## identitas pembuat
+Tobias Natalio Sianipar - 13521090 - K2
