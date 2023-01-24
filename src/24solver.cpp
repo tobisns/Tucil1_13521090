@@ -185,6 +185,26 @@ std::string converttocard(int number) {
 	}
 }
 
+bool validasiinput(std::string a, std::string b, std::string c, std::string d) {
+	std::deque<std::string> cards = {a,b,c,d};
+	std::deque<std::string> constrain = { "A","2","3","4","5","6","7","8","9","10","J","Q","K" };
+
+	bool validity = false;
+	for (int i = 0; i < cards.size(); i++) {
+		validity = false;
+		for (int j = 0; j < constrain.size(); j++) {
+			if (cards[i] == constrain[j]) {
+				validity = true;
+				break;
+			}
+		}
+		if (!validity) {
+			return false;
+		}
+	}
+	return true;
+}
+
 int main() {
 	
 
@@ -195,73 +215,101 @@ int main() {
 	int count = 0;
 	solve24(intcards,a,b, count, ans);
 	std::cout << count << " " << ans.size();*/
-
-	std::cout << "apakah kartu di random?(y/n)" << std::endl;
 	char option;
-	int A, B, C, D;
-	std::cin >> option;
-	if (option == 'y') {
-		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	bool validity;
+	do {
+		std::cout << "selamat datang di solver24, ketik '4' untuk exit. ketik '1' untuk mulai.\n\n" << std::endl;
+		std::cin >> option;
+		if (option == '1') {
+			int A, B, C, D;
+			do {
 
-		A = std::rand() % 12 + 1;
-		B = std::rand() % 12 + 1;
-		C = std::rand() % 12 + 1;
-		D = std::rand() % 12 + 1;
+				std::cout << "apakah kartu di random?(y/n)" << std::endl;
 
-		std::cout << "kartu anda adalah " << converttocard(A) << " " << converttocard(B) << " " << converttocard(C) << " " << converttocard(D) << std::endl;
 
-	}
-	else {
-		std::cout << "input 4 kartu" << std::endl;
-		std::string a, b, c, d;
-		std::cin >> a >> b >> c >> d;
-		
-		A = converttoint(a);
-		B = converttoint(b);
-		C = converttoint(c);
-		D = converttoint(d);
-	}
-	std::deque<int> intcards = { A,B,C,D };
-	std::deque<double> doublecards = { static_cast<double>(A),static_cast<double>(B),static_cast<double>(C),static_cast<double>(D) };
-	std::deque<std::string> ans;
-	std::deque<std::string> mark = { "a","b","c","d" };
-	int count = 0;
-	auto started = std::chrono::high_resolution_clock::now();
-	
-	
-	solve24(intcards, doublecards, mark, count, ans);
+				std::cin >> option;
+				if (option == 'y') {
+					std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-	std::cout << "jumlah solusi yang mungkin sebanyak " << count << std::endl;
+					A = std::rand() % 12 + 1;
+					B = std::rand() % 12 + 1;
+					C = std::rand() % 12 + 1;
+					D = std::rand() % 12 + 1;
 
-	auto done = std::chrono::high_resolution_clock::now();
+					std::cout << "kartu anda adalah " << converttocard(A) << " " << converttocard(B) << " " << converttocard(C) << " " << converttocard(D) << std::endl;
 
-	std::cout << "waktu kalkulasi: " << std::chrono::duration_cast<std::chrono::milliseconds>(done - started).count() << "ms\n" << std::endl;
+				}
+				else if (option == 'n') {
+					do {
+						std::cout << "input 4 kartu" << std::endl;
+						std::string a, b, c, d;
+						std::cin >> a >> b >> c >> d;
 
-	std::cout << "apakah ingin save jawaban?(y/n) " << std::endl;
-	std::cin >> option;
+						validity = validasiinput(a, b, c, d);
 
-	if (option == 'y') {
-		std::string nama;
-		std::cout << "tuliskan nama file penyimpanan(tidak perlu .txt)" << std::endl;
-		std::cin >> nama;
-		std::fstream mfile;
-		mfile.open(nama+".txt", std::ios::out);
-		if (!mfile) {
-			std::cout << "File not created!";
+						if (!validity) {
+							std::cout << "terjadi kesalahan input." << std::endl << std::endl;
+						}
+						else {
+							A = converttoint(a);
+							B = converttoint(b);
+							C = converttoint(c);
+							D = converttoint(d);
+						}
+					} while (!validity);
+				}
+				else if (option == '4') { return 0; }
+				else {
+					std::cout << "terjadi kesalahan input." << std::endl << std::endl;
+				}
+			} while (!((option == 'y') || (option == 'n')));
+			std::deque<int> intcards = { A,B,C,D };
+			std::deque<double> doublecards = { static_cast<double>(A),static_cast<double>(B),static_cast<double>(C),static_cast<double>(D) };
+			std::deque<std::string> ans;
+			std::deque<std::string> mark = { "a","b","c","d" };
+			int count = 0;
+			auto started = std::chrono::high_resolution_clock::now();
+
+
+			solve24(intcards, doublecards, mark, count, ans);
+
+			std::cout << "jumlah solusi yang mungkin sebanyak " << count << std::endl;
+
+			auto done = std::chrono::high_resolution_clock::now();
+
+			std::cout << "waktu kalkulasi: " << std::chrono::duration_cast<std::chrono::milliseconds>(done - started).count() << "ms\n" << std::endl;
+
+			do {
+				std::cout << "apakah ingin save jawaban?(y/n) " << std::endl;
+				std::cin >> option;
+
+				if (option == 'y') {
+					std::string nama;
+					std::cout << "tuliskan nama file penyimpanan(tidak perlu .txt)" << std::endl;
+					std::cin >> nama;
+					std::fstream mfile;
+					mfile.open(nama + ".txt", std::ios::out);
+					if (!mfile) {
+						std::cout << "File not created!";
+					}
+					else {
+						std::cout << "File created successfully!\n\n";
+						mfile << "kartu anda adalah " << converttocard(A) << " " << converttocard(B) << " " << converttocard(C) << " " << converttocard(D) << std::endl;
+						for (int i = 0; i < ans.size(); i++) {
+							mfile << ans[i] << std::endl;
+						}
+						mfile << "jumlah solusi yang mungkin sebanyak " << count << std::endl;
+						mfile.close();
+					}
+
+				}
+				else if (option == 'n') {
+					std::cout << "ok,\n\n";
+				}
+				else {
+					std::cout << "terjadi kesalahan input." << std::endl << std::endl;
+				}
+			} while (!((option == 'y') || (option == 'n')));
 		}
-		else {
-			std::cout << "File created successfully!";
-			mfile << "kartu anda adalah " << converttocard(A) << " " << converttocard(B) << " " << converttocard(C) << " " << converttocard(D) << std::endl;
-			for (int i = 0; i < ans.size(); i++) {
-				mfile << ans[i] << std::endl;
-			}
-			mfile << "jumlah solusi yang mungkin sebanyak " << count << std::endl;
-			mfile.close();
-		}
-
-		std::cout << "program selesai." << std::endl;
-	}
-	else {
-		std::cout << "program selesai." << std::endl;
-	}
+	} while (option != '4');
 }
